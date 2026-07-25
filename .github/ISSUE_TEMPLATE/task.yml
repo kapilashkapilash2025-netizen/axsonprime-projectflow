@@ -1,0 +1,44 @@
+name: Task (docs, tests, tech debt, CI, dependencies)
+description: Documentation, testing, refactoring, technical debt, CI/CD, or dependency maintenance work.
+labels: ["task"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Documentation
+        - Testing
+        - Technical debt / refactoring
+        - CI/CD
+        - Dependency maintenance
+        - Accessibility
+        - Performance
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What's the real gap or issue this addresses?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] Criterion one
+        - [ ] Criterion two
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context

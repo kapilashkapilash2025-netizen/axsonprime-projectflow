@@ -1,0 +1,50 @@
+name: Bug report
+description: Something in ProjectFlow isn't working as expected.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the real problem you ran into.
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: What currently happens?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What should happen instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps so a maintainer can reproduce this reliably.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: What must be true for this to be considered fixed?
+      placeholder: |
+        - [ ] Criterion one
+        - [ ] Criterion two
+  - type: textarea
+    id: security
+    attributes:
+      label: Security considerations
+      description: Does this bug have any security implications? If it's a vulnerability, please use private reporting instead (see SECURITY.md).
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Screenshots, logs, environment details, related issues.

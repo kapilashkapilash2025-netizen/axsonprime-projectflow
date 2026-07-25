@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f8fb;
+  --surface: #ffffff;
+  --surface-muted: #eef0f5;
+  --foreground: #14161f;
+  --muted-foreground: #5b6270;
+  --border: #dde1ea;
+  --accent: #0066ff;
+  --accent-foreground: #ffffff;
+  --secondary: #7a1f3d;
+  --secondary-foreground: #ffffff;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --ring: #0066ff;
+}
+
+:root[data-theme="dark"] {
+  --background: #0a0c12;
+  --surface: #12141d;
+  --surface-muted: #191c28;
+  --foreground: #e8eaf2;
+  --muted-foreground: #949aad;
+  --border: #262a3a;
+  --accent: #3d8bff;
+  --accent-foreground: #04101f;
+  --secondary: #b23a5e;
+  --secondary-foreground: #fff0f4;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --ring: #3d8bff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0a0c12;
+    --surface: #12141d;
+    --surface-muted: #191c28;
+    --foreground: #e8eaf2;
+    --muted-foreground: #949aad;
+    --border: #262a3a;
+    --accent: #3d8bff;
+    --accent-foreground: #04101f;
+    --secondary: #b23a5e;
+    --secondary-foreground: #fff0f4;
+    --success: #34d399;
+    --warning: #fbbf24;
+    --danger: #f87171;
+    --ring: #3d8bff;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media print {
+  nav,
+  header.app-header,
+  .no-print {
+    display: none !important;
+  }
+}

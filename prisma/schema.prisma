@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  PAUSED
+  BLOCKED
+  COMPLETED
+  ARCHIVED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum PhaseStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum TaskStatus {
+  BACKLOG
+  READY
+  IN_PROGRESS
+  IN_REVIEW
+  BLOCKED
+  COMPLETED
+}
+
+enum IssueType {
+  BUG
+  FEATURE
+  SECURITY
+  DOCUMENTATION
+  TESTING
+  TECH_DEBT
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum IssueStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  WONT_FIX
+}
+
+enum QualityCheckType {
+  LINT
+  TYPE_CHECK
+  UNIT_TESTS
+  INTEGRATION_TESTS
+  E2E_TESTS
+  PRODUCTION_BUILD
+  SECURITY_REVIEW
+  ACCESSIBILITY_REVIEW
+  DOCUMENTATION_REVIEW
+}
+
+model Project {
+  id                String    @id @default(cuid())
+  name              String
+  description       String?
+  status            ProjectStatus @default(PLANNING)
+  priority          Priority  @default(MEDIUM)
+  techStack         String?
+  repositoryUrl     String?
+  targetReleaseDate DateTime?
+  progress          Int       @default(0)
+  isSample          Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  phases         Phase[]
+  tasks          Task[]
+  issues         Issue[]
+  qualityGates   QualityGate[]
+  milestones     Milestone[]
+  releases       Release[]
+  activityEvents ActivityEvent[]
+  githubLink     GitHubLink?
+}
+
+model Phase {
+  id          String      @id @default(cuid())
+  projectId   String
+  project     Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  order       Int         @default(0)
+  status      PhaseStatus @default(NOT_STARTED)
+  tasks       Task[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([projectId])
+}
+
+model Task {
+  id                 String    @id @default(cuid())
+  projectId          String
+  project            Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  phaseId            String?
+  phase              Phase?    @relation(fields: [phaseId], references: [id], onDelete: SetNull)
+  parentTaskId       String?
+  parentTask         Task?     @relation("SubTasks", fields: [parentTaskId], references: [id], onDelete: SetNull)
+  subtasks           Task[]    @relation("SubTasks")
+  title              String
+  description        String?
+  status             TaskStatus @default(BACKLOG)
+  priority           Priority  @default(MEDIUM)
+  assignee           String?
+  dueDate            DateTime?
+  labels             String?
+  acceptanceCriteria String?
+  dependsOnIds       String?
+  completedAt        DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([projectId])
+  @@index([phaseId])
+}
+
+model Issue {
+  id                 String      @id @default(cuid())
+  projectId          String
+  project            Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title              String
+  description        String?
+  type               IssueType   @default(BUG)
+  severity           Severity    @default(MEDIUM)
+  status             IssueStatus @default(OPEN)
+  acceptanceCriteria String?
+  resolutionNotes    String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+
+  @@index([projectId])
+}
+
+model QualityGate {
+  id        String           @id @default(cuid())
+  projectId String
+  project   Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  check     QualityCheckType
+  passed    Boolean          @default(false)
+  notes     String?
+  checkedAt DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([projectId, check])
+}
+
+model Milestone {
+  id        String    @id @default(cuid())
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String
+  dueDate   DateTime?
+  completed Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([projectId])
+}
+
+model Release {
+  id               String   @id @default(cuid())
+  projectId        String
+  project          Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  version          String
+  changelogUpdated Boolean  @default(false)
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([projectId])
+}
+
+model ActivityEvent {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  type      String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model GitHubLink {
+  id                String   @id @default(cuid())
+  projectId         String   @unique
+  project           Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  repositoryUrl     String?
+  branchName        String?
+  issueNumber       Int?
+  pullRequestNumber Int?
+  pullRequestStatus String?
+  commitRef         String?
+  ciStatus          String?
+  reviewStatus      String?
+  mergeStatus       String?
+  updatedAt         DateTime @updatedAt
+}
+
+model AppSettings {
+  id                   String        @id @default("singleton")
+  applicationName      String        @default("ProjectFlow")
+  organizationName     String        @default("AXSONprime")
+  defaultProjectStatus ProjectStatus @default(PLANNING)
+  dateFormat           String        @default("yyyy-MM-dd")
+  themePreference      String        @default("dark")
+  updatedAt            DateTime      @updatedAt
+}

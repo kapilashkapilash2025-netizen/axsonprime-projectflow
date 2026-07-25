@@ -1,0 +1,41 @@
+name: Feature request
+description: Propose a real, scoped improvement to ProjectFlow.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What problem does this solve? Who runs into it?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Describe the recommended implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] Criterion one
+        - [ ] Criterion two
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: Testing requirements
+      description: What needs to be tested (unit, component, e2e)?
+  - type: textarea
+    id: security
+    attributes:
+      label: Security considerations
+      description: Any relevant security implications of this change.
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
