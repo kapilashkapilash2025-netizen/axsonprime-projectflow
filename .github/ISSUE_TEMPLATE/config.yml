@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Security vulnerability
-    url: https://github.com/AXSONprime/axsonprime-projectflow/security/advisories/new
+    url: https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow/security/advisories/new
     about: Please report security vulnerabilities privately — see SECURITY.md, do not open a public issue.

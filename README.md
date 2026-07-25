@@ -71,7 +71,7 @@ independently unit-tested `src/domain` functions. Full details in
 ## Installation
 
 ```bash
-git clone https://github.com/AXSONprime/axsonprime-projectflow.git
+git clone https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow.git
 cd axsonprime-projectflow
 pnpm install
 ```
