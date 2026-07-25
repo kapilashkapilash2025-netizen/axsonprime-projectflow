@@ -24,7 +24,8 @@ async function main() {
       status: "ACTIVE",
       priority: "HIGH",
       techStack: "Next.js, TypeScript, Prisma, SQLite, Tailwind CSS",
-      repositoryUrl: "https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow",
+      repositoryUrl:
+        "https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow",
       targetReleaseDate: daysFromNow(21),
       progress: 72,
       isSample: true,
@@ -196,7 +197,8 @@ async function main() {
   await prisma.gitHubLink.create({
     data: {
       projectId: projectFlow.id,
-      repositoryUrl: "https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow",
+      repositoryUrl:
+        "https://github.com/kapilashkapilash2025-netizen/axsonprime-projectflow",
       branchName: "main",
       pullRequestStatus: "open",
       ciStatus: "passing",

@@ -28,7 +28,9 @@ test.describe("Critical ProjectFlow flows", () => {
     ).toBeVisible();
 
     await page.goto("/projects");
-    await expect(page.getByText(projectName)).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: projectName }),
+    ).toBeVisible();
   });
 
   test("a user can toggle a quality gate on a project", async ({ page }) => {
