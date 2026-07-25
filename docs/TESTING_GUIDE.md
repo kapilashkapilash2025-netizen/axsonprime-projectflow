@@ -61,9 +61,14 @@ the Playwright suite instead of unit coverage targets.
 
 ## CI
 
-All three suites (unit/component via Vitest, plus lint, typecheck, and build)
-run in GitHub Actions on every pull request — see
-`.github/workflows/ci.yml`. Playwright is intentionally not part of the
-required CI gate yet (it needs browser binaries and a longer runtime); it's
-run locally before merging changes that touch critical flows. Wiring it into
-CI as a separate, non-blocking job is tracked in `docs/ROADMAP.md`.
+Unit/component tests via Vitest, plus lint, typecheck, and build, run as the
+required `CI` workflow on every push and pull request — see
+`.github/workflows/ci.yml`.
+
+Playwright runs in a separate `E2E (Playwright)` workflow
+(`.github/workflows/e2e.yml`) against a freshly migrated and seeded
+database, with the Chromium browser cached between runs and the HTML report
+uploaded as a build artifact on every run (not just failures). This job is
+intentionally **non-blocking** (`continue-on-error: true`) for now: browser
+installs add real runtime, and we want a track record of green runs before
+making it a hard merge gate — see `docs/ROADMAP.md`.

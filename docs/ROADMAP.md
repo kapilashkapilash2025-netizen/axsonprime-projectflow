@@ -23,7 +23,7 @@ move up as real usage surfaces real needs.
 
 ## Next
 
-- [ ] Wire Playwright into CI as a non-blocking job (needs browser binaries
+- [x] Wire Playwright into CI as a non-blocking job (needs browser binaries
       cached in the runner; see `docs/TESTING_GUIDE.md`)
 - [ ] Phase/task drag-and-drop reordering (a genuine candidate for adopting
       React Hook Form on the client side — see ADR 0001)
