@@ -39,25 +39,25 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4",
-    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^20",
+    "@testing-library/user-event": "^14.6.5",
+    "@types/node": "^26",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.3",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.10",
+    "@vitejs/plugin-react": "^6.0.5",
+    "eslint": "^10",
+    "eslint-config-next": "16.3.1",
     "eslint-config-prettier": "^10.1.8",
-    "jsdom": "^29.1.1",
-    "prettier": "^3.9.5",
-    "prettier-plugin-tailwindcss": "^0.8.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
-    "tsx": "^4.23.0",
-    "typescript": "^5",
+    "tsx": "^4.23.12",
+    "typescript": "^7",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   }
 }
